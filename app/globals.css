@@ -127,8 +127,21 @@
   }
 }
 
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 .animate-fadeIn {
   animation: fadeIn 0.5s ease-out;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
 }
 
 /* Gradient text */
@@ -144,4 +157,81 @@
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Page flip styles */
+.flip-book-container {
+  perspective: 1000px;
+}
+
+.flip-book-container .page {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Touch gestures */
+.touch-none {
+  touch-action: none;
+}
+
+/* Reader specific styles */
+.reader-page {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Landscape mode for mobile double page */
+@media screen and (orientation: landscape) and (max-width: 768px) {
+  .mobile-double-page {
+    width: 100vh;
+    height: 100vw;
+    transform: rotate(90deg);
+    transform-origin: center;
+  }
+}
+
+/* Page transition effects */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Skeleton loading animation */
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.dark .skeleton {
+  background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+  background-size: 200px 100%;
 }
